@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView, Button, Pressable} from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export default function App() {
@@ -11,13 +11,24 @@ export default function App() {
           source={require("./assets/sunny.jpg")}
           style={styles.sunnyImage}
         />
-        <Image
-          source={{
-            uri: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          }}
-          style={styles.remoteImage}
+        <Button
+        title= "press"
+        onPress={() => console.log("Button pressed")}
+        color= "green"
         />
-        <Text style={styles.goodDayText}>que tenga un buen día</Text>
+        <Pressable onPress={() => console.log("Image pressed")}>
+          <Image
+            source={{
+              uri: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
+            }}
+            style={styles.remoteImage}
+          />
+        </Pressable>
+       
+       <Pressable onPress={() => console.log("goodDayText pressed")}>
+          <Text style={styles.goodDayText}>que tenga un buen día</Text>
+       </Pressable>
+
         <Text style={styles.goodDayTextSmall}>que tenga un buen día</Text>
         <StatusBar style="auto" />
       </View>
