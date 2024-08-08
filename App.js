@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react"; // Added import for useState
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -9,26 +9,44 @@ import {
   Button,
   Pressable,
   Modal,
+  Alert,
 } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 
 export default function App() {
-  const [isModalVisible, setIsModalVisible] = useState(false); // Corrected useState syntax
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <Text style={styles.greetingText}>Hola! Buenas Dias</Text>
         <Image
-              source={{
-                uri: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-              }}
-              style={styles.remoteImage}
-            />
+          source={{
+            uri: "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
+          }}
+          style={styles.remoteImage}
+        />
         <Button
           title="Press"
           onPress={() => setIsModalVisible(true)}
           color="green"
+        />
+        <Button
+          title="Alert"
+          onPress={() =>
+            Alert.alert(
+              "Invalid data!",
+              "Age restricted",
+              [
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                },
+              ],
+              { cancelable: true }
+            )
+          }
+          color="red"
         />
 
         <Modal
@@ -38,7 +56,7 @@ export default function App() {
           presentationStyle="pageSheet"
         >
           <View style={styles.container}>
-          <Image source={require("./assets/sunny.jpg")} style={styles.sunnyImage} />
+            <Image source={require("./assets/sunny.jpg")} style={styles.sunnyImage} />
             <Button
               title="Cerca"
               color="lightgreen"
@@ -95,37 +113,12 @@ export default function App() {
           using a React Native Framework like Expo. Expo provides features like
           file-based routing, high-quality universal libraries, and the ability
           to write plugins that modify native code without having to manage
-          native files. Many different kinds of people use React Native: from
-          advanced iOS developers to React beginners, to people getting started
-          programming for the first time in their career. These docs were
-          written for all learners, no matter their experience level or
-          background. You can start here and read through these docs linearly
-          like a book; or you can read the specific sections you need. Already
-          familiar with React? You can skip that section—or read it for a light
-          refresher. To work with React Native, you will need to have an
-          understanding of JavaScript fundamentals. If you’re new to JavaScript
-          or need a refresher, you can dive in or brush up at Mozilla Developer
-          Network. The above is a Snack Player. It’s a handy tool created by
-          Expo to embed and run React Native projects and share how they render
-          in platforms like Android and iOS. The code is live and editable, so
-          you can play directly with it in your browser. Go ahead and try
-          changing the "Try editing me!" text above to "Hello, world!" People
-          from many different development backgrounds are learning React Native.
-          You may have experience with a range of technologies, from web to
-          Android to iOS and more. We try to write for developers from all
-          backgrounds. Sometimes we provide explanations specific to one
-          platform or another like so: React Native allows developers who know
-          React to create native apps. At the same time, native developers can
-          use React Native to gain parity between native platforms by writing
-          common features once. We believe that the best way to experience React
-          Native is through a Framework, a toolbox with all the necessary APIs
-          to let you build production-ready apps. You can also use React Native
-          without a Framework, however, we’ve found that most developers benefit
-          from using a React Native Framework like Expo. Expo provides features
-          like file-based routing, high-quality universal libraries, and the
-          ability to write plugins that modify native code without having to
-          manage native files.
+          native files.
         </Text>
+      </View>
+
+      <View style={{ flex: 1, padding: 60 }}>
+        <StatusBar backgroundColor="lightblue" barStyle="light-content" hidden={false} />
       </View>
     </ScrollView>
   );
@@ -133,8 +126,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   scrollView: {
-    flex: 1,
-    backgroundColor: "#f0f8ff", // Background color for the scroll view
+    backgroundColor: "#f0f8ff",
   },
   container: {
     alignItems: "center",
@@ -142,9 +134,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   greetingText: {
+    marginTop: 20,
     color: "green",
     fontSize: 30,
-    fontFamily: "poppins",
     fontWeight: "bold",
     textAlign: "center",
   },
@@ -175,7 +167,6 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 10,
-    fontFamily: "poppins",
     textAlign: "justify",
   },
 });
