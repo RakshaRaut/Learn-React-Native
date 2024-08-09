@@ -1,5 +1,5 @@
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,13 +10,16 @@ import {
   Pressable,
   Modal,
   Alert,
+  SafeAreaView,
 } from "react-native";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
+import Navbar from "./components/Navbar.js";
 
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
+  <View style={styles.main}>
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <Text style={styles.greetingText}>Hola! Buenas Dias</Text>
@@ -41,6 +44,10 @@ export default function App() {
                 {
                   text: "Cancel",
                   onPress: () => console.log("Cancel Pressed"),
+                },
+                {
+                  text: "OK",
+                  onPress: () => console.log("Ok Pressed"),
                 },
               ],
               { cancelable: true }
@@ -81,50 +88,31 @@ export default function App() {
         <Text style={styles.goodDayTextSmall}>que tenga un buen día</Text>
         <StatusBar style="auto" />
       </View>
+      
 
       <View style={styles.infoContainer}>
         <Text style={styles.infoText}>
           Many different kinds of people use React Native: from advanced iOS
           developers to React beginners, to people getting started programming
           for the first time in their career. These docs were written for all
-          learners, no matter their experience level or background. You can
-          start here and read through these docs linearly like a book; or you
-          can read the specific sections you need. Already familiar with React?
-          You can skip that section—or read it for a light refresher. To work
-          with React Native, you will need to have an understanding of
-          JavaScript fundamentals. If you’re new to JavaScript or need a
-          refresher, you can dive in or brush up at Mozilla Developer Network.
-          The above is a Snack Player. It’s a handy tool created by Expo to
-          embed and run React Native projects and share how they render in
-          platforms like Android and iOS. The code is live and editable, so you
-          can play directly with it in your browser. Go ahead and try changing
-          the "Try editing me!" text above to "Hello, world!" People from many
-          different development backgrounds are learning React Native. You may
-          have experience with a range of technologies, from web to Android to
-          iOS and more. We try to write for developers from all backgrounds.
-          Sometimes we provide explanations specific to one platform or another
-          like so: React Native allows developers who know React to create
-          native apps. At the same time, native developers can use React Native
-          to gain parity between native platforms by writing common features
-          once. We believe that the best way to experience React Native is
-          through a Framework, a toolbox with all the necessary APIs to let you
-          build production-ready apps. You can also use React Native without a
-          Framework, however, we’ve found that most developers benefit from
-          using a React Native Framework like Expo. Expo provides features like
-          file-based routing, high-quality universal libraries, and the ability
-          to write plugins that modify native code without having to manage
-          native files.
+          learners, no matter their experience level or background...
         </Text>
       </View>
 
       <View style={{ flex: 1, padding: 60 }}>
-        <StatusBar backgroundColor="lightblue" barStyle="light-content" hidden={false} />
+        <StatusBar backgroundColor="white" barStyle="light-content" hidden={false} />
       </View>
     </ScrollView>
+    <Navbar /> 
+
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  main:{
+    paddingTop: 32,
+  },
   scrollView: {
     backgroundColor: "#f0f8ff",
   },
